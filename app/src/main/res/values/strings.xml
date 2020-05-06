@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PocketGardener</string>
+    <string name="navigation_advice">Advice</string>
+    <string name="header_advice">Advice</string>
+    <string name="navigation_garden">Your Garden</string>
+    <string name="header_garden">Your Garden</string>
+    <string name="back_button">Back</string>
+    <string name="try_button">Try Me</string>
+    <string name="header_advice_plant">Plant</string>
+    <string name="time_title">Time</string>
+    <string name="season_title">Season</string>
+    <string name="steps_title">Steps</string>
+    <string name="planted_title">Planted</string>
+    <string name="ready_title">Ready</string>
+    <string name="tips_title">Tips</string>
+</resources>
