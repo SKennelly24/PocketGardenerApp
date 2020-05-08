@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mainPagerAdapter.setItems(arrayListOf(MainScreen.ADVICE, MainScreen.GARDEN))
 
         // Show the default screen.
-        val defaultScreen = MainScreen.GARDEN
+        val defaultScreen = MainScreen.ADVICE
         scrollToScreen(defaultScreen)
         selectBottomNavigationViewMenuItem(defaultScreen.menuItemId)
         supportActionBar?.setTitle(defaultScreen.titleStringId)
