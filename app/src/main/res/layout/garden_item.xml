@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/garden_image"
+        android:layout_width="123dp"
+        android:layout_height="98dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/garden" />
+
+    <TextView
+        android:id="@+id/garden_name"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:text="@string/header_advice_plant"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/garden_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>

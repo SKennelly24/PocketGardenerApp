@@ -12,9 +12,9 @@ class PlantAdviceActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.individual_advice)
-        val name = intent.getStringArrayExtra("plant_name")
-        val time = intent.getStringArrayExtra("plant_time")
-        val season = intent.getStringArrayExtra("plant_season")
+        val name = intent.getStringExtra("plant_name")
+        val time = intent.getStringExtra("plant_time")
+        val season = intent.getStringExtra("plant_season")
         val time_id : TextView = findViewById(R.id.timeText)
         val season_id : TextView = findViewById(R.id.seasonText)
         val name_id : TextView = findViewById(R.id.plant_header)

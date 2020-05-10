@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlantAdviceActivity" />
+        <activity android:name=".GardenActivity" />
     </application>
 
 </manifest>
