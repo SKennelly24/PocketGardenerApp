@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GardenFragment : Fragment() {
     private lateinit var gardenPicker : RecyclerView
-    private var garden_list : List<GardenItem> = listOf(GardenItem("Carrots", "carrot"))
+    private var gardenList : List<GardenItem> = listOf(GardenItem("Carrots", "carrot"))
     private lateinit var adapter: GardenAdapter
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class GardenFragment : Fragment() {
         val layoutManager = GridLayoutManager(context, 2)
         gardenPicker.layoutManager = layoutManager
         adapter = context?.let { context ->
-            GardenAdapter(context, garden_list) {
+            GardenAdapter(context, gardenList) {
                 launchIndividualGarden(it)
             }
         }!!

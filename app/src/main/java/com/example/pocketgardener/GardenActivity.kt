@@ -13,9 +13,8 @@ class GardenActivity : AppCompatActivity(){
         setContentView(R.layout.individual_plant)
         val nameTextView : TextView = findViewById(R.id.plant_header)
         val name = intent.getStringExtra("garden_name")
-        Log.d("Plant", name)
         nameTextView.text = name
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

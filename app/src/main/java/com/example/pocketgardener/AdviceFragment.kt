@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.reflect.Array.newInstance
 
 
 class AdviceFragment : Fragment() {
     private lateinit var plantPicker: RecyclerView
-    private var plant_list: List<PlantItem> = listOf(
+    private var plantList: List<PlantItem> = listOf(
         PlantItem("Carrots", "summer", "1 week",
             "https://cdn.shopify.com/s/files/1/2971/2126/products/Carrot_2000x.jpg?v=1528770261"))
     private lateinit var adapter: PlantAdapter
@@ -41,7 +40,7 @@ class AdviceFragment : Fragment() {
 
         //Connect adapter to the recycler view
         adapter = context?.let { context ->
-            PlantAdapter(context, plant_list) {
+            PlantAdapter(context, plantList) {
                 launchIndividualActivity(it)
             }
         }!!

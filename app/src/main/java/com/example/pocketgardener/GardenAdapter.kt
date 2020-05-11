@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 
-class GardenAdapter(val context: Context,
-                   private val garden_list: List<GardenItem>,
-                   val clickListener: (GardenItem) -> Unit): RecyclerView.Adapter<GardenViewHolder>() {
+class GardenAdapter(
+    private val context: Context,
+    private val garden_list: List<GardenItem>,
+    val clickListener: (GardenItem) -> Unit): RecyclerView.Adapter<GardenViewHolder>() {
 
     override fun getItemCount(): Int = garden_list.size
 
