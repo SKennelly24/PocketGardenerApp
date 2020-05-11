@@ -17,4 +17,11 @@
     <string name="reminder_button">Tautuhi Whakamaumahara</string>
     <string name="take_photo_button">Tangohia te whakaahua</string>
     <string name="upload_photo_button">Whakaatu i te whakaahua</string>
+    <string name="new_plant">" Whakato hou"</string>
+    <string name="add_plant">" Tāpirihia he tipu"</string>
+    <string name="new_plant_example_name">" Kāreti"</string>
+    <string name="new_plant_example_planted">" 11 Pepuere 2020"</string>
+    <string name="comments_title">Nga korero</string>
+    <string name="new_plant_example_comments">" Kei te titiro nga rau"</string>
+    <string name="empty_string">" "</string>
 </resources>

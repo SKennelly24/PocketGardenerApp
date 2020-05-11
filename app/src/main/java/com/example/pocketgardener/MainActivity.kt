@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mainPagerAdapter = MainPagerAdapter(supportFragmentManager)
 
         // Set items to be displayed.
-        mainPagerAdapter.setItems(arrayListOf(MainScreen.ADVICE, MainScreen.GARDEN))
+        mainPagerAdapter.setItems(arrayListOf(MainScreen.GARDEN, MainScreen.ADVICE))
 
         // Show the default screen.
-        val defaultScreen = MainScreen.ADVICE
+        val defaultScreen = MainScreen.GARDEN
         scrollToScreen(defaultScreen)
         selectBottomNavigationViewMenuItem(defaultScreen.menuItemId)
 

@@ -12,8 +12,14 @@ class GardenActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.individual_plant)
         val nameTextView : TextView = findViewById(R.id.plant_header)
-        val name = intent.getStringExtra("garden_name")
+        val plantedTextView : TextView = findViewById(R.id.plantedText)
+        val commentTextView : TextView = findViewById(R.id.commentText)
+        val name = intent.getStringExtra("name")
+        val planted = intent.getStringExtra("planted")
+        val comments = intent.getStringExtra("comments")
         nameTextView.text = name
+        plantedTextView.text = planted
+        commentTextView.text = comments
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

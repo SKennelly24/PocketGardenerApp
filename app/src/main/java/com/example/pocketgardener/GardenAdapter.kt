@@ -1,16 +1,39 @@
 package com.example.pocketgardener
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class GardenAdapter(
-    private val context: Context,
-    private val garden_list: List<GardenItem>,
-    val clickListener: (GardenItem) -> Unit): RecyclerView.Adapter<GardenViewHolder>() {
+    val context: Context,
+    val clickListener: (YourPlant) -> Unit): RecyclerView.Adapter<GardenViewHolder>() {
+    private var recyclerView: RecyclerView? = null
 
-    override fun getItemCount(): Int = garden_list.size
+    var gardenList: MutableList<YourPlant> = mutableListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    var database: YourPlantDatabase? = null
+        set(value) {
+            field = value
+            value?.let {
+                LoadPlantsTask(it, this).execute()
+            }
+        }
+
+    init {
+        LoadDatabaseTask(this).execute()
+    }
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
+
+    override fun getItemCount(): Int = gardenList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GardenViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -18,13 +41,28 @@ class GardenAdapter(
         val holder = GardenViewHolder(view)
 
         view.setOnClickListener {
-            clickListener(garden_list[holder.adapterPosition])
+            clickListener(gardenList[holder.adapterPosition])
         }
         return holder
     }
 
     override fun onBindViewHolder(holder: GardenViewHolder, i: Int) {
-        holder.name.text = garden_list[i].name
+        holder.name.text = gardenList[i].name
     }
+
+    fun insert(plant: YourPlant) {
+        Log.d("Garden List", gardenList.toString())
+        Log.d("Plant", plant.name)
+        if (database != null) {
+            NewYourPlantTask(database!!, plant).execute()
+            gardenList.add(plant)
+            notifyItemInserted(gardenList.size -1)
+        } else {
+            Log.d("Garden Adapter", "Database null")
+        }
+    }
+
+
+
 
 }
