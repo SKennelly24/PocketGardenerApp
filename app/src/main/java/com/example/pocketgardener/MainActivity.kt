@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val defaultScreen = MainScreen.ADVICE
         scrollToScreen(defaultScreen)
         selectBottomNavigationViewMenuItem(defaultScreen.menuItemId)
-        supportActionBar?.setTitle(defaultScreen.titleStringId)
 
         // Set the listener for item selection in the bottom navigation view.
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             override fun onPageSelected(position: Int) {
                 val selectedScreen = mainPagerAdapter.getItems()[position]
                 selectBottomNavigationViewMenuItem(selectedScreen.menuItemId)
-                supportActionBar?.setTitle(selectedScreen.titleStringId)
             }
         })
     }

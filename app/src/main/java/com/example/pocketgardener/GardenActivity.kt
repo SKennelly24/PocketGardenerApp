@@ -1,11 +1,11 @@
 package com.example.pocketgardener
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
-class GardenActivity : Activity(){
+class GardenActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.individual_plant)
@@ -13,5 +13,6 @@ class GardenActivity : Activity(){
         val name = intent.getStringExtra("garden_name")
         Log.d("Plant", name)
         nameTextView.text = name
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
     }
 }
