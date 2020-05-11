@@ -13,4 +13,9 @@
     <string name="planted_title">Planted</string>
     <string name="ready_title">Ready</string>
     <string name="tips_title">Tips</string>
+    <string name="share_button">Share Progress</string>
+    <string name="reminder_button">Set Reminder</string>
+    <string name="take_photo_button">Take Photo</string>
+    <string name="upload_photo_button">Upload Photo</string>
+
 </resources>
