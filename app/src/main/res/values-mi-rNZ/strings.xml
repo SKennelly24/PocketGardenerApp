@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PokapuKai</string>
+    <string name="navigation_advice">Tohutohu</string>
+    <string name="header_advice">Tohutohu</string>
+    <string name="navigation_garden">To Kari</string>
+    <string name="header_garden">To Kari</string>
+    <string name="try_button">Whakamātauria Ahau</string>
+    <string name="header_advice_plant">Te tipu</string>
+    <string name="time_title">Te wa</string>
+    <string name="season_title">Wā</string>
+    <string name="steps_title">Nga mahi</string>
+    <string name="planted_title">Kua whakatokia</string>
+    <string name="ready_title">Ka rite</string>
+    <string name="tips_title">He tohutohu</string>
+    <string name="share_button">Whakahaerehia Te ahunga whakamua</string>
+    <string name="reminder_button">Tautuhi Whakamaumahara</string>
+    <string name="take_photo_button">Tangohia te whakaahua</string>
+    <string name="upload_photo_button">Whakaatu i te whakaahua</string>
+</resources>
