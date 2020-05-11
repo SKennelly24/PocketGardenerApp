@@ -1,7 +1,6 @@
 package com.example.pocketgardener
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,12 +12,9 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 
 class GardenFragment : Fragment() {
     private lateinit var gardenPicker : RecyclerView
-    private var gardenList : List<YourPlant> = listOf(
-        YourPlant("Carrots", "1st April", "they look great"))
     private lateinit var adapter: GardenAdapter
     private lateinit var dialogView : View
 

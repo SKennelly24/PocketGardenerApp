@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class PlantAdapter(val context: Context,
-                   private val plant_list: List<PlantItem>,
-                   val clickListener: (PlantItem) -> Unit): RecyclerView.Adapter<PlantViewHolder>() {
+class PlantAdapter(
+    private val context: Context,
+    private val plant_list: List<PlantItem>,
+    val clickListener: (PlantItem) -> Unit): RecyclerView.Adapter<PlantViewHolder>() {
     override fun getItemCount(): Int = plant_list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {

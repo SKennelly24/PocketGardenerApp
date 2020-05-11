@@ -3,7 +3,6 @@ package com.example.pocketgardener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.pocketgardener.MainScreen
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
