@@ -24,4 +24,7 @@
     <string name="comments_title">Nga korero</string>
     <string name="new_plant_example_comments">" Kei te titiro nga rau"</string>
     <string name="empty_string">" "</string>
+    <string name="delete_plant">"Mukua te tipu"</string>
+    <string name="clear_plants">"Maama Tarau"</string>
+
 </resources>

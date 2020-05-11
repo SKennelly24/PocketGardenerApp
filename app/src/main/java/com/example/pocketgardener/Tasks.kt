@@ -42,3 +42,15 @@ class NewYourPlantTask(private val database : YourPlantDatabase, private val you
         yourPlant.id = database.yourPlantDao().insert(yourPlant)
     }
 }
+
+class DeleteYourPlantTask(private val database: YourPlantDatabase, private val plant: YourPlant) : AsyncTask<Unit, Unit, Unit>() {
+    override fun doInBackground(vararg params: Unit?) {
+        database.yourPlantDao().delete(plant)
+    }
+}
+
+class ClearDatabaseTask(private val database: YourPlantDatabase): AsyncTask<Unit, Unit, Unit>() {
+    override fun doInBackground(vararg params: Unit?) {
+        database.clearAllTables()
+    }
+}

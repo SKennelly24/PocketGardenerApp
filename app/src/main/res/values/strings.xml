@@ -23,6 +23,9 @@
     <string name="new_plant_example_planted">11 Feb 2020</string>
     <string name="new_plant_example_comments">Leaves looking wilted</string>
     <string name="empty_string">" "</string>
+    <string name="delete_plant">"Delete Plant"</string>
+    <string name="clear_plants">"Clear Plants"</string>
+
 
 
 </resources>

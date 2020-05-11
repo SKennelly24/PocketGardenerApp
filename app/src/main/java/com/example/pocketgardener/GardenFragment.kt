@@ -31,12 +31,44 @@ class GardenFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_garden, container, false)
         gardenPicker = view.findViewById(R.id.garden_recycler)
         initRecyclerView()
+        val clearPlantButton : Button = view.findViewById(R.id.clearButton)
+        clearPlantButton.setOnClickListener {
+            adapter.clear()
+        }
+        val deletePlantButton : Button = view.findViewById(R.id.deleteButton)
+        deletePlantButton.setOnClickListener {
+            deletePlantDialog()
+        }
         val newPlantButton: Button = view.findViewById(R.id.new_plant_button)
         newPlantButton.setOnClickListener {
             newPlantDialog()
         }
         return view
     }
+
+    private fun getPlantNames(plants: List<YourPlant>) :Array<String>{
+        val plantNames :ArrayList<String> = arrayListOf()
+        for (plant in plants) {
+            plantNames.add(plant.name)
+        }
+        return plantNames.toTypedArray()
+    }
+
+    private fun deletePlantDialog() {
+        var index = -1
+        val plantNames = getPlantNames(adapter.gardenList)
+        val builder = context?.let { androidx.appcompat.app.AlertDialog.Builder(it) }
+        builder?.setTitle("Delete a Plant")
+        builder?.setSingleChoiceItems(plantNames, -1) {_, i ->
+            index = i
+        }
+        builder?.setPositiveButton("OK") { _, _->
+            adapter.delete(index)
+        }
+        builder?.setNegativeButton("Cancel", null)
+        builder?.create()?.show()
+    }
+
     private fun newPlantDialog() {
         if (dialogView.parent != null) {
             (dialogView.parent as ViewGroup).removeView(dialogView)

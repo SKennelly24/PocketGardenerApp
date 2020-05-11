@@ -62,7 +62,19 @@ class GardenAdapter(
         }
     }
 
+    fun delete(deleteIndex : Int) {
+        val plant = gardenList.removeAt(deleteIndex)
+        notifyItemRemoved(deleteIndex)
+        DeleteYourPlantTask(database!!, plant).execute()
 
+    }
 
+    fun clear() {
+        if (database != null) {
+            gardenList.clear()
+            notifyDataSetChanged()
+            ClearDatabaseTask(database!!).execute()
+        }
+    }
 
 }
