@@ -6,7 +6,7 @@
     <string name="header_garden">Your Garden</string>
     <string name="try_button">Try Me</string>
     <string name="header_advice_plant">Plant</string>
-    <string name="time_title">Time</string>
+    <string name="time_title">Average Time Till Harvest</string>
     <string name="season_title">Season</string>
     <string name="steps_title">Steps</string>
     <string name="planted_title">Planted</string>
@@ -25,6 +25,11 @@
     <string name="empty_string">" "</string>
     <string name="delete_plant">"Delete Plant"</string>
     <string name="clear_plants">"Clear Plants"</string>
+    <string name="till_harvest">"till harvest"</string>
+    <string name="info_title">For More Information</string>
+    <string name="click_here">Click Here</string>
+    <string name="days">days</string>
+
 
 
 

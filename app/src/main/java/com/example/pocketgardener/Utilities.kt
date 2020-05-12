@@ -4,7 +4,13 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import org.json.JSONObject
+import java.io.BufferedInputStream
+import java.net.URL
+import java.nio.charset.Charset
 import java.util.*
+import javax.net.ssl.HttpsURLConnection
 
 object Utilities {
     fun scheduleReminder(context: Context, hour: Int, minute: Int) {
@@ -23,4 +29,21 @@ object Utilities {
             PendingIntent.getBroadcast(context, 0, it, 0)
         }
     }
+
+    fun getJson(url: URL): JSONObject {
+        val connection = url.openConnection() as HttpsURLConnection
+        try {
+            val json = BufferedInputStream(connection.inputStream).readBytes().toString(Charset.defaultCharset())
+            return JSONObject(json)
+        } finally {
+            connection.disconnect()
+        }
+    }
+
+    fun parameterizeUrl(url: String): URL {
+        val builder = Uri.parse(url).buildUpon()
+        val uri = builder.build()
+        return URL(uri.toString())
+    }
+
 }

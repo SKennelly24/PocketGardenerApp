@@ -26,5 +26,9 @@
     <string name="empty_string">" "</string>
     <string name="delete_plant">"Mukua te tipu"</string>
     <string name="clear_plants">"Maama Tarau"</string>
+    <string name="till_harvest">kia kotia</string>
+    <string name="info_title">Mo Etahi Atu Korero</string>
+    <string name="click_here">Pāwhiritia Konei</string>
+    <string name="days">rā</string>
 
 </resources>

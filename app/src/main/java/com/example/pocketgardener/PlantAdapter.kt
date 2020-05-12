@@ -25,14 +25,14 @@ class PlantAdapter(
 
     override fun onBindViewHolder(holder: PlantViewHolder, i: Int) {
         holder.name.text = plant_list[i].name
-        Picasso.get().load(plant_list[i].image_url).into(holder.image)
+        //Picasso.get().load(plant_list[i].image_url).into(holder.image)
 
-        when(plant_list[i].season) {
+        /*when(plant_list[i].season) {
             "winter" -> holder.season.setImageResource(R.drawable.winter)
             "autumn" -> holder.season.setImageResource(R.drawable.autmn)
             "summer" -> holder.season.setImageResource(R.drawable.summer)
             "spring" -> holder.season.setImageResource(R.drawable.spring)
-        }
+        }*/
 
         holder.time.text = plant_list[i].time
     }
