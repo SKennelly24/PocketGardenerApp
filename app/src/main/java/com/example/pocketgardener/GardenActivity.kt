@@ -3,11 +3,9 @@ package com.example.pocketgardener
 import android.app.*
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
@@ -16,7 +14,6 @@ import android.widget.TextView
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class GardenActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener{

@@ -1,17 +1,12 @@
 package com.example.pocketgardener
 
-import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
 import com.example.pocketgardener.Utilities.getJson
 import com.example.pocketgardener.Utilities.parameterizeUrl
 import org.json.JSONException
-import org.json.JSONObject
-import java.io.BufferedInputStream
 import java.lang.ref.WeakReference
 import java.net.URL
-import java.nio.charset.Charset
-import javax.net.ssl.HttpsURLConnection
 
 const val URL = "https://www.growstuff.org/api/v1/crops?sort=median_days_to_first_harvest"
 

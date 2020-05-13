@@ -6,7 +6,6 @@ import com.squareup.picasso.Picasso
 import org.json.JSONException
 import java.io.FileNotFoundException
 import java.lang.ref.WeakReference
-import java.net.URL
 
 class ImageDownloader(
     activity: PlantAdviceActivity, private val growUrl: String): AsyncTask<Unit, Void, String>() {
