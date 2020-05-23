@@ -2,6 +2,7 @@ package com.example.pocketgardener
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -91,8 +92,14 @@ class GardenFragment : Fragment() {
 
 
     private fun initRecyclerView() {
-        val layoutManager = GridLayoutManager(context, 2)
-        gardenPicker.layoutManager = layoutManager
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            val layoutManager = GridLayoutManager(context, 4)
+            gardenPicker.layoutManager = layoutManager
+        } else {
+            val layoutManager = GridLayoutManager(context, 2)
+            gardenPicker.layoutManager = layoutManager
+        }
         adapter = context?.let { context ->
             GardenAdapter(context) {
                 launchIndividualGarden(it)

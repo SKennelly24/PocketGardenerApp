@@ -14,7 +14,7 @@
     <string name="tips_title">Tips</string>
     <string name="share_button">Share Progress</string>
     <string name="reminder_button">Set Reminder</string>
-    <string name="take_photo_button">Take Photo</string>
+    <string name="add_photo_button">Add photo</string>
     <string name="upload_photo_button">Upload Photo</string>
     <string name="new_plant">New Plant</string>
     <string name="add_plant">Add a Plant</string>
@@ -29,8 +29,24 @@
     <string name="info_title">For More Information</string>
     <string name="click_here">Click Here</string>
     <string name="days">days</string>
-
-
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+    <string name="taken">When was this taken?</string>
+    <string-array name="month_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string name="take_photo_button">Take Photo</string>
 
 
 </resources>

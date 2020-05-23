@@ -10,11 +10,7 @@
         android:title="@string/reminder_button"
         app:showAsAction="never" />
     <item
-        android:id="@+id/takePhotoButton"
-        android:title="@string/take_photo_button"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/uploadPhotoButton"
-        android:title="@string/upload_photo_button"
+        android:id="@+id/addButton"
+        android:title="@string/add_photo_button"
         app:showAsAction="never" />
 </menu>

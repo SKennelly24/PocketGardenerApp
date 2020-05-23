@@ -30,5 +30,9 @@
     <string name="info_title">Mo Etahi Atu Korero</string>
     <string name="click_here">Pāwhiritia Konei</string>
     <string name="days">rā</string>
+    <string name="month">Marama</string>
+    <string name="day">Rā</string>
+    <string name="add_photo_button">" Tāpirihia te whakaahua"</string>
+    <string name="taken">" I te wa i tangohia ai tenei?"</string>
 
 </resources>

@@ -31,7 +31,7 @@
         android:text="@string/planted_title"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/plantedText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plant_header" />
@@ -48,7 +48,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/empty_string"
         app:layout_constraintBottom_toTopOf="@+id/readyHeader"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantedHeader" />
 
@@ -65,7 +65,7 @@
         android:text="@string/ready_title"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/readyText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantedText" />
@@ -80,7 +80,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/empty_string"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/readyHeader" />
 
@@ -95,7 +95,7 @@
         android:layout_marginRight="10dp"
         android:text="@string/comments_title"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/readyText" />
@@ -110,9 +110,12 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/empty_string"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/photosList"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/commentHeader"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/photosList"
@@ -120,13 +123,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentText" />
+        app:layout_constraintStart_toEndOf="@+id/commentText"
+        app:layout_constraintTop_toBottomOf="@+id/plant_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
