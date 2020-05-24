@@ -99,9 +99,6 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
             if (photos.size > 0) {
                 val last_photo = photos[photos.size-1].file.absolutePath
                 result.putExtra("image", last_photo)
-
-                //val bitmap = BitmapFactory.decodeFile(photos[i].file.absolutePath)
-                //holder.photoView.setImageBitmap(bitmap)
             }
             setResult(Activity.RESULT_OK, result)
         } else {
