@@ -81,7 +81,7 @@ class GardenFragment : Fragment() {
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setView(dialogView)
         builder?.setPositiveButton("Ok") { _, _ ->
-            val name = editName.text.toString()
+            val name = editName.text.toString().capitalize()
             val planted = editPlanted.text.toString()
             val comments = editComments.text.toString()
             addPlant(name, planted, comments)
@@ -122,6 +122,19 @@ class GardenFragment : Fragment() {
         val notificationsOn = prefs.getBoolean("notifications", true)
         Log.d("GardenFragment", "Notifications: $notificationsOn")
         intent.putExtra("notifications", notificationsOn)
-        startActivity(intent)
+
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("GardenFragment", "On activity result")
+        when(requestCode) {
+            1 -> {
+                val name = data?.getStringExtra("name")
+                Log.d("GardenFragment", "Returned $name")
+                //holder.photoView.setImageBitmap(bitmap)
+            }
+        }
     }
 }

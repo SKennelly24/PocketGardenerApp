@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
@@ -21,6 +22,7 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider.getUriForFile
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
@@ -66,7 +68,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
         nameTextView.text = name
         plantedTextView.text = planted
         commentTextView.text = comments
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         createNotificationChannel()
         setUpSpinners()
         val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -91,6 +93,16 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
                 }
             }
             photosList.adapter = PhotoAdapter(photos)
+            val result = Intent()
+            result.putExtra("name", name)
+            if (photos.size > 0) {
+                val last_photo = photos[photos.size-1].file.absolutePath
+                //result.putExtra("image", last_photo)
+
+                //val bitmap = BitmapFactory.decodeFile(photos[i].file.absolutePath)
+                //holder.photoView.setImageBitmap(bitmap)
+            }
+            setResult(Activity.RESULT_OK, result)
         } else {
             if (!photoDirectory.mkdirs()) {
                 Log.d(TAG, "directory not made")
