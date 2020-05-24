@@ -54,3 +54,11 @@ class ClearDatabaseTask(private val database: YourPlantDatabase): AsyncTask<Unit
         database.clearAllTables()
     }
 }
+
+class UpdatePlantTask(private val database: YourPlantDatabase,
+                     private val plant: YourPlant) : AsyncTask<Unit, Unit, Unit>() {
+    override fun doInBackground(vararg p0: Unit?) {
+        database.yourPlantDao().update(plant)
+    }
+}
+

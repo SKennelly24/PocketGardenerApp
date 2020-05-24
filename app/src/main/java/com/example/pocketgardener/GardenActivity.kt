@@ -87,7 +87,8 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
                 if (name in file_dir.toString()) {
                     for (file in file_dir.listFiles()) {
                         Log.d(TAG, "File: $file")
-                        var file_name = file.toString().substring(44)
+                        val start_index = (file.toString()).length - 9
+                        val file_name = file.toString().substring(start_index)
                         photos.add(PlantPhoto(File(file_dir, file_name)))
                     }
                 }
@@ -97,7 +98,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
             result.putExtra("name", name)
             if (photos.size > 0) {
                 val last_photo = photos[photos.size-1].file.absolutePath
-                //result.putExtra("image", last_photo)
+                result.putExtra("image", last_photo)
 
                 //val bitmap = BitmapFactory.decodeFile(photos[i].file.absolutePath)
                 //holder.photoView.setImageBitmap(bitmap)

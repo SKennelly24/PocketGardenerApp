@@ -91,7 +91,7 @@ class GardenFragment : Fragment() {
     }
 
     private fun addPlant(name: String, planted: String, comments: String) {
-        adapter.insert(YourPlant(name, planted, comments))
+        adapter.insert(YourPlant(name, planted, comments, ""))
     }
 
 
@@ -133,7 +133,11 @@ class GardenFragment : Fragment() {
             1 -> {
                 val name = data?.getStringExtra("name")
                 Log.d("GardenFragment", "Returned $name")
-                //holder.photoView.setImageBitmap(bitmap)
+                if (name != "" && name != null) {
+                    val image = data?.getStringExtra("image")
+                    Log.d("GardenFragment", "Image: $image")
+                    adapter.updateImage(name, image)
+                }
             }
         }
     }

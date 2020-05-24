@@ -5,6 +5,7 @@ import androidx.room.*
 interface YourPlantDao {
     @Insert
     fun insert(plant: YourPlant): Long
+
     @Update
     fun update(plant: YourPlant)
 

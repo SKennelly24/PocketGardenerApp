@@ -1,10 +1,13 @@
 package com.example.pocketgardener
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+
+const val LOCAL_TAG = "Garden Adapter"
 
 class GardenAdapter(
     val context: Context,
@@ -40,6 +43,7 @@ class GardenAdapter(
         val view = inflater.inflate(R.layout.garden_item, parent, false)
         val holder = GardenViewHolder(view)
 
+
         view.setOnClickListener {
             clickListener(gardenList[holder.adapterPosition])
         }
@@ -48,6 +52,11 @@ class GardenAdapter(
 
     override fun onBindViewHolder(holder: GardenViewHolder, i: Int) {
         holder.name.text = gardenList[i].name
+        if (gardenList[i].image != "") {
+            val bitmap = BitmapFactory.decodeFile(gardenList[i].image)
+            holder.image.setImageBitmap(bitmap)
+            Log.d(LOCAL_TAG, "Adding photo")
+        }
     }
 
     fun insert(plant: YourPlant) {
@@ -58,7 +67,7 @@ class GardenAdapter(
             gardenList.add(plant)
             notifyItemInserted(gardenList.size -1)
         } else {
-            Log.d("Garden Adapter", "Database null")
+            Log.d(LOCAL_TAG, "Database null")
         }
     }
 
@@ -77,4 +86,20 @@ class GardenAdapter(
         }
     }
 
+    fun updateImage(plantName: String, image : String) {
+        Log.d(LOCAL_TAG, "updating image")
+        var updateIndex = -1
+        for (i in gardenList.indices) {
+            if (plantName == gardenList[i].name) {
+                updateIndex = i
+            }
+        }
+        Log.d(LOCAL_TAG, "Index is $updateIndex")
+        if (updateIndex != -1) {
+            gardenList[updateIndex].image = image
+            Log.d(LOCAL_TAG, "Plant Image is: ${gardenList[updateIndex].image}")
+            notifyItemChanged(updateIndex)
+            UpdatePlantTask(database!!, gardenList[updateIndex]).execute()
+        }
+    }
 }
