@@ -47,6 +47,7 @@
         <item>December</item>
     </string-array>
     <string name="take_photo_button">Take Photo</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

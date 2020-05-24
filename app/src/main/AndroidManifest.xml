@@ -39,6 +39,7 @@
                 android:value="com.example.pocketgardener.MainActivity"/>
         </activity>
         <activity android:name=".PermittedActivity" />
+        <activity android:name=".SettingsActivity" />
 
         <receiver
             android:name=".BootReceiver"

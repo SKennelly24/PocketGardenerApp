@@ -34,5 +34,7 @@
     <string name="day">Rā</string>
     <string name="add_photo_button">" Tāpirihia te whakaahua"</string>
     <string name="taken">" I te wa i tangohia ai tenei?"</string>
+    <string name="settings">Tautuhinga</string>
+
 
 </resources>

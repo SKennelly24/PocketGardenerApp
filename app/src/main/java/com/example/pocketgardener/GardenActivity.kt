@@ -42,6 +42,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
     private lateinit var daySpinner : Spinner
     private lateinit var monthSpinner : Spinner
     private lateinit var prefs: SharedPreferences
+    private var notifications = true
 
     private val photoDirectory
         get() = File(Environment.getExternalStorageDirectory(), "pocketgardener")
@@ -61,6 +62,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
         name = intent.getStringExtra("name")
         val planted = intent.getStringExtra("planted")
         val comments = intent.getStringExtra("comments")
+        notifications = intent.getBooleanExtra("notifications", true)
         nameTextView.text = name
         plantedTextView.text = planted
         commentTextView.text = comments
@@ -69,7 +71,6 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
         setUpSpinners()
         val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         requestPermissions(permissions, 100, {
-            //promptForTodo()
         }, {
             Toast.makeText(this, "Unable to store photos.", Toast.LENGTH_LONG).show()
         })
@@ -198,7 +199,12 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
 
     private fun setReminder() {
         Log.d("ActionBar", "Set Reminder")
-        setReminderTime()
+        if (notifications) {
+            setReminderTime()
+        } else {
+            Toast.makeText(this, "Cannot set reminder, turn this on in settings.", Toast.LENGTH_LONG).show()
+        }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -297,6 +303,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d(TAG, "Finished get photo activity")
         when(requestCode) {
