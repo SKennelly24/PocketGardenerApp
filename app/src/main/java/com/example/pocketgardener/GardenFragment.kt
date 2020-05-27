@@ -4,23 +4,33 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
+import java.io.FileOutputStream
+import java.io.PrintStream
 
 class GardenFragment : Fragment() {
     private lateinit var gardenPicker : RecyclerView
     private lateinit var adapter: GardenAdapter
     private lateinit var dialogView : View
     private lateinit var prefs: SharedPreferences
+    private var player: MediaPlayer? = null
 
 
     override fun onCreateView(
@@ -63,6 +73,7 @@ class GardenFragment : Fragment() {
         builder?.setTitle("Delete a Plant")
         builder?.setSingleChoiceItems(plantNames, -1) {_, i ->
             index = i
+            animateThing(i)
         }
         builder?.setPositiveButton("OK") { _, _->
             adapter.delete(index)
@@ -70,6 +81,13 @@ class GardenFragment : Fragment() {
         builder?.setNegativeButton("Cancel", null)
         builder?.create()?.show()
     }
+
+    private fun animateThing(index: Int) {
+        val viewHolder : GardenViewHolder = gardenPicker.findViewHolderForAdapterPosition(index) as GardenViewHolder
+        val animation = AnimationUtils.loadAnimation(context, R.anim.sample_animation)
+        viewHolder.image.startAnimation(animation)
+    }
+
 
     private fun newPlantDialog() {
         if (dialogView.parent != null) {
@@ -92,7 +110,46 @@ class GardenFragment : Fragment() {
 
     private fun addPlant(name: String, planted: String, comments: String) {
         adapter.insert(YourPlant(name, planted, comments, ""))
+        play()
+
     }
+    private fun play() {
+        releasePlayer()
+
+        val file = File.createTempFile("ding_", ".ding", context?.cacheDir)
+        writeSongToFile(file)
+        player = MediaPlayer.create(context, Settings.System.DEFAULT_NOTIFICATION_URI).apply {
+            start()
+            setOnCompletionListener {
+                releasePlayer()
+                file.delete()
+            }
+        }
+
+    }
+
+    fun writeSongToFile(file: File) {
+        val title = ""
+        val beatsPerMinute = 100
+        val notes = "4c4 4c4 4g4 4g4 4a4 4a4 2g4"
+        PrintStream(FileOutputStream(file)).apply {
+            println("$title:d=4,o=5,b=$beatsPerMinute:${notes.split("\\s+".toRegex()).joinToString(",")}")
+            close()
+        }
+    }
+
+    private fun releasePlayer() {
+        player?.stop()
+        player?.release()
+        player = null
+    }
+
+    override fun onStop() {
+        super.onStop()
+        releasePlayer()
+    }
+
+
 
 
 

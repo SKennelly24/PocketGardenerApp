@@ -6,8 +6,12 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
 class TimePickerFragment: DialogFragment() {
-    var listener: TimePickerDialog.OnTimeSetListener? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return TimePickerDialog(activity, listener, 6, 0, false)
     }
+
+    var listener: TimePickerDialog.OnTimeSetListener? = null
+    var hour: Int = 6
+    var minute: Int = 0
+
 }

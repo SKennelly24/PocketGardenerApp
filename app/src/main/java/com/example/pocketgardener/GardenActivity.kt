@@ -1,13 +1,12 @@
 package com.example.pocketgardener
 
 import android.app.*
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import android.icu.util.Calendar
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,14 +14,10 @@ import android.os.Environment
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider.getUriForFile
-import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
@@ -34,49 +29,68 @@ private const val REQUEST_CAMERA = 110
 private const val REQUEST_GALLERY = 111
 private const val TAG = "GardenPhoto"
 
-class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
+class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener {
     private lateinit var name : String
     private lateinit var photosList: RecyclerView
-
-    private var month = 1
-    private var day = 1
     private lateinit var dialogView : View
+
     private lateinit var daySpinner : Spinner
     private lateinit var monthSpinner : Spinner
-    private lateinit var prefs: SharedPreferences
+    private var month = 1
+    private var day = 1
     private var notifications = true
+    private var file_name = ""
+
+    private lateinit var prefs: SharedPreferences
 
     private val photoDirectory
         get() = File(Environment.getExternalStorageDirectory(), "pocketgardener")
+
+    private fun setUpUI() {
+        name = intent.getStringExtra("name")
+        val planted = intent.getStringExtra("planted")
+        val comments = intent.getStringExtra("comments")
+        notifications = intent.getBooleanExtra("notifications", true)
+
+        val nameTextView : TextView = findViewById(R.id.plant_header)
+        val plantedTextView : TextView = findViewById(R.id.plantedText)
+        val commentTextView : TextView = findViewById(R.id.commentText)
+
+        nameTextView.text = name
+        plantedTextView.text = planted
+        commentTextView.text = comments
+
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
         val inflater = LayoutInflater.from(this)
         dialogView = inflater.inflate(R.layout.alert_photo, null)
         setContentView(R.layout.individual_plant)
-        val nameTextView : TextView = findViewById(R.id.plant_header)
-        val plantedTextView : TextView = findViewById(R.id.plantedText)
-        val commentTextView : TextView = findViewById(R.id.commentText)
+        setUpUI()
+
         photosList = findViewById(R.id.photosList)
         photosList.layoutManager = GridLayoutManager(this, 3)
-        name = intent.getStringExtra("name")
-        val planted = intent.getStringExtra("planted")
-        val comments = intent.getStringExtra("comments")
-        notifications = intent.getBooleanExtra("notifications", true)
-        nameTextView.text = name
-        plantedTextView.text = planted
-        commentTextView.text = comments
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         createNotificationChannel()
         setUpSpinners()
+
+        sortOutPermissions()
+        loadDayPhotos()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun sortOutPermissions() {
         val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         requestPermissions(permissions, 100, {
         }, {
             Toast.makeText(this, "Unable to store photos.", Toast.LENGTH_LONG).show()
         })
-        loadDayPhotos()
     }
 
     private fun loadDayPhotos() {
@@ -88,7 +102,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
                     for (file in file_dir.listFiles()) {
                         Log.d(TAG, "File: $file")
                         val start_index = (file.toString()).length - 9
-                        val file_name = file.toString().substring(start_index)
+                        file_name = file.toString().substring(start_index)
                         photos.add(PlantPhoto(File(file_dir, file_name)))
                     }
                 }
@@ -97,8 +111,8 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
             val result = Intent()
             result.putExtra("name", name)
             if (photos.size > 0) {
-                val last_photo = photos[photos.size-1].file.absolutePath
-                result.putExtra("image", last_photo)
+                val lastPhoto = photos[photos.size-1].file.absolutePath
+                result.putExtra("image", lastPhoto)
             }
             setResult(Activity.RESULT_OK, result)
         } else {
@@ -124,8 +138,9 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
 
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onTimeSet(picker: TimePicker, hour: Int, minute: Int) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
         prefs.edit().apply {
             putInt("hour", hour)
             putInt("minute", minute)
@@ -137,14 +152,15 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
         val receiver = ComponentName(this, BootReceiver::class.java)
         packageManager.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
 
-
-
     }
 
     private fun setReminderTime() {
         val fragment = TimePickerFragment()
         fragment.listener = this
-        fragment.show(supportFragmentManager,null)
+        fragment.hour = prefs.getInt("hour", 6)
+        fragment.minute = prefs.getInt("minute", 0)
+        fragment.show(supportFragmentManager, null)
+
 
 
     }
@@ -152,8 +168,8 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(Notification.CATEGORY_REMINDER, "Weekly Reminder", importance).apply {
-            description = "Take a photo of your $name"
+        val channel = NotificationChannel(Notification.CATEGORY_REMINDER, "Daily Reminder", importance).apply {
+            description = "Remember to water your $name"
         }
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
@@ -205,6 +221,28 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
 
     private fun share() {
         Log.d("ActionBar", "Share Progress")
+        if (file_name == "") {
+            val toast = Toast.makeText(this, "Cannot share latest photo, no photos have been taken", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL, 0, 0)
+                toast.show()
+        } else {
+            var month_int = file_name.substring(0,2).toInt()
+            var day_int = file_name.substring(3,5).toInt()
+            Log.d(TAG, "Month: $month_int")
+            Log.d(TAG, "Day: $day_int")
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "image/*"
+            shareIntent.putExtra(Intent.EXTRA_STREAM, dayUri(name, month_int, day_int))
+            shareIntent.setPackage("com.instagram.android")
+            try {
+                startActivity(shareIntent)
+            } catch(e: ActivityNotFoundException) {
+                Toast.makeText(this, "You do not have instagram installed", Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
     }
 
     private fun setReminder() {
@@ -212,7 +250,7 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener{
         if (notifications) {
             setReminderTime()
         } else {
-            Toast.makeText(this, "Cannot set reminder, turn this on in settings.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Cannot set reminder, turn this on in app settings.", Toast.LENGTH_LONG).show()
         }
 
     }

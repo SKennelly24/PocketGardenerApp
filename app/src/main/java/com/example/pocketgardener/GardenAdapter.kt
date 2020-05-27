@@ -2,10 +2,15 @@ package com.example.pocketgardener
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
 
 const val LOCAL_TAG = "Garden Adapter"
 
@@ -102,4 +107,5 @@ class GardenAdapter(
             UpdatePlantTask(database!!, gardenList[updateIndex]).execute()
         }
     }
+
 }
