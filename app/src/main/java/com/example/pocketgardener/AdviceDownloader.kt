@@ -24,7 +24,7 @@ class AdviceDownloader(activity: AdviceFragment): AsyncTask<URL, Void, List<Plan
                 val image_url = "https://www.growstuff.org/api/v1/photos/$id"
                 val plant_attributes = plants.getJSONObject("attributes")
                 val time = plant_attributes.getInt("median-days-to-first-harvest")
-                PlantItem(plant_attributes.getString("name"), time.toString(), plant_attributes.getString("en-wikipedia-url"), image_url)
+                PlantItem(plant_attributes.getString("name").capitalize(), time.toString(), plant_attributes.getString("en-wikipedia-url"), image_url)
             }
         }catch (e: JSONException) {
             Log.d("Error", "AsyncTask")

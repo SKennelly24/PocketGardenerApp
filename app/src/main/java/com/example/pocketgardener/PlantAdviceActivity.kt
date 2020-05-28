@@ -32,6 +32,6 @@ class PlantAdviceActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }

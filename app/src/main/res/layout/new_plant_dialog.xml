@@ -17,11 +17,16 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -33,21 +38,25 @@
 
         <EditText
             android:id="@+id/edit_plant_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
+            android:autofillHints=""
             android:hint="@string/new_plant_example_name"
             android:inputType="text"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,21 +71,24 @@
 
         <EditText
             android:id="@+id/edit_planted"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
+            android:autofillHints=""
             android:hint="@string/new_plant_example_planted"
             android:inputType="text"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:minWidth="200dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,15 +102,15 @@
 
         <EditText
             android:id="@+id/edit_comments"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
+            android:autofillHints=""
             android:hint="@string/new_plant_example_comments"
             android:inputType="text"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

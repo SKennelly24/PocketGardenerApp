@@ -113,12 +113,17 @@ class GardenActivity : PermittedActivity(), TimePickerDialog.OnTimeSetListener {
             if (photos.size > 0) {
                 val lastPhoto = photos[photos.size-1].file.absolutePath
                 result.putExtra("image", lastPhoto)
+            } else {
+                result.putExtra("image", "")
             }
             setResult(Activity.RESULT_OK, result)
         } else {
             if (!photoDirectory.mkdirs()) {
                 Log.d(TAG, "directory not made")
             }
+            val result = Intent()
+            result.putExtra("name", name)
+            result.putExtra("image", "")
         }
     }
 
